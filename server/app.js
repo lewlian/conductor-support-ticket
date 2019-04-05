@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
+var env = require("./env");
 
 const app = express();
 
@@ -81,5 +82,33 @@ const ticketRoutes = require("./routers/ticket.route");
 const statusUpdateRoutes = require("./routers/statusUpdate.route");
 app.use("/ticket", ticketRoutes);
 app.use("/status", statusUpdateRoutes);
+
+app.get('/with-cors', cors(), (req, res, next) => {
+  res.json({ msg: 'WHOAH with CORS it works! 🔝 🎉' })
+  const axios = require('axios');
+      let config = {
+      headers: { 'Server-Token': env.ACN_TOKEN,
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Accept': 'application/json'},
+      params: {"of":"json","lang":"en","txt":"%22text01%22:%20%22The%20new%20button%20not%20working%22%0A%22text02%22:%20%22button%20will%20not%20start%20activity%22%0A%22text03%22:%20%22button%20press%20is%20delayed%22%20%0A%22text04%22:%20%22add%20a%20new%20screen%20option%20to%20adjust%20user%20settings%22%0A%22text05%22:%20%22feature%20request%20for%20long%20timeout%22"}
+    };
+  let url = 'http://ug-api.acnapiv3.io/swivel/text-clustering/clustering-1.1'
+  let data = ""
+  async function func(){
+    axios.post(url, data, config)
+         .then((response) => {
+          //   console.log(response.data);
+            console.log(JSON.stringify(response.data));
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
+  func()
+
+})
 
 module.exports = app;

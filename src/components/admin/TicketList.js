@@ -46,16 +46,17 @@ export default class TicketList extends Component {
   }
 
   textClusterRequest = () => {
-    axios
-      .get("http://localhost:4000/ticket/getall")
-      .then(response => {
-        console.log("text cluster request");
-        console.log(response);
-        this.setState({ ticket: response.data });
-      })
-      .catch((error, response) => {
-        console.log(error);
-      });
+    console.log("text cluster request");
+    // axios.get('https://api.github.com/users/thaddeusphua')
+    // .then(res => {
+    //   console.log(res.data.login);
+    // });
+    axios.get('http://localhost:4000/with-cors')
+    .then(res => {
+      console.log(res.data);
+    });
+
+
   };
 
   render() {
