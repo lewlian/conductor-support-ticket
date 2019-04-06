@@ -51,7 +51,7 @@ export default class TicketList extends Component {
     // .then(res => {
     //   console.log(res.data.login);
     // });
-    axios.get('http://localhost:4000/with-cors')
+    axios.post('http://localhost:4000/with-cors')
     .then(res => {
       console.log(res.data);
     });
