@@ -39,11 +39,9 @@ export default class Edit extends Component {
   onSubmit(e) {
     e.preventDefault();
     const obj = {
-      formType: this.state.formType,
-      topics: this.state.topics,
       description: this.state.description
     };
-    axios.patch('http://localhost:4000/ticket/update/'+this.props.match.params.id)
+    axios.patch('http://localhost:4000/ticket/update/'+this.props.match.params.id, obj)
         .then(res => console.log(res.data))
         .catch(function (error) {
           console.log(error);
